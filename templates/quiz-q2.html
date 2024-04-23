@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+  <div class="container my-4">
+    <div class="question">
+      <p>True or false: a minor chord sounds bright or happy while a major chord sounds sad or contemplative</p>
+    </div>
+    <div class="answers">
+      <button id="true" class="btn btn-secondary">True</button>
+      <button id="false" class="btn btn-secondary">False</button>
+    </div>
+    <div id="result" class="result" style="display:none;"></div>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+  <script type="text/javascript" src="{{ url_for('static', filename='quiz.js') }}"></script>
+{% endblock %}
