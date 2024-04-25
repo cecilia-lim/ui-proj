@@ -1,6 +1,84 @@
 {% extends "layout.html" %}
 
-
 {% block content %}
+<style>
+    .jumbotron{
+        padding-bottom: 20px;
+    }
+    #title-home{
+    font-family: Arial;
+    font-size: 40px;
+    color: #595959ff;
+    text-align: center;
+    margin-bottom: 0px;
+    }
+    #blurb-home{
+        font-family: Arial;
+        color: #595959ff;
+        text-align: center;
+    }
+    #p-home{
+        font-family: Arial;
+        color: #595959ff;
+        text-align: center;
+    }
+    #start-home{
+        font-family: Arial;
+        text-align: center;
+    }
+    
+    .container{
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    }
+    .container a{
+    font-family: sans-serif;
+    color: #ffffff;
+    position: relative;
+    font-size: 1.2rem;
+    }
 
+    .custom-screen{
+        padding: 20px;
+    }
+
+    .start-button {
+        font-family: sans-serif;
+        color: #ffffff;
+        position: relative;
+        font-size: 1.2rem;
+        text-decoration: none; /* Add this to remove the underline from the link */
+        display: inline-block; /* Add this to enable the positioning of the ::before element */
+    }
+    .start-button::before {
+        content: '';
+        border-bottom: 125px solid #48bcabff;
+        border-left: 75px solid transparent;
+        border-right: 75px solid transparent;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(90deg);
+        z-index: -1;
+    }
+
+</style>
+
+<div class="container-flex custom-screen">
+    <div class="jumbotron">
+        <p id="title-home">Pop Chord Progressions</p>
+        <i><p id="blurb-home">Do you like Olivia Rodrigo? Ever wonder about the theory behind her hits?</p></i>
+    </div>
+
+    <div class="row">
+        <p id="p-home">Let’s take a look at her songs! Chord progressions can get crazy and fancy, but when it comes pop and rock ballads, there’s a reused formula that’s pretty simple. Once you know one, you’ll hear it everywhere! Ready to learn more?</p>
+    </div>
+
+    <div class="container start-btn">
+        <a href="/learn/1" class="start-button">start</a>
+    </div>
+
+</div>
 {% endblock %}

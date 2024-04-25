@@ -1,28 +1,33 @@
 document.addEventListener('DOMContentLoaded', (event) => {
-    const trueButton = document.getElementById('true');
-    const falseButton = document.getElementById('false');
-    const resultDiv = document.getElementById('result');
-  
-    trueButton.addEventListener('click', function() {
-      setResult(falseButton, trueButton, 'Incorrect');
+  const buttons = document.querySelectorAll('.answers button');
+  const resultDiv = document.getElementById('result');
+
+  buttons.forEach(button => {
+    button.addEventListener('click', function() {
+      const isCorrect = this.getAttribute('data-correct') === 'true';
+      console.log('Clicked button:', this.id, 'isCorrect:', isCorrect); // This will log the result
+      setResult(button, isCorrect);
     });
-  
-    falseButton.addEventListener('click', function() {
-      setResult(trueButton, falseButton, 'Correct');
-    });
-  
-    function setResult(correctButton, incorrectButton, message) {
-      correctButton.classList.remove('btn-secondary');
-      correctButton.classList.add('btn-success');
-      incorrectButton.classList.remove('btn-secondary');
-      incorrectButton.classList.add('btn-danger');
-      resultDiv.textContent = message;
-      resultDiv.style.display = 'block';
-      if (message === 'Correct') {
-        resultDiv.className = 'result alert alert-success';
-      } else {
-        resultDiv.className = 'result alert alert-danger';
-      }
-    }
   });
-  
+
+
+  buttons.forEach(button => {
+    button.addEventListener('click', function() {
+      const isCorrect = this.getAttribute('data-correct') === 'true';
+      setResult(button, isCorrect);
+    });
+  });
+
+  function setResult(selectedButton, isCorrect) {
+    buttons.forEach(btn => {
+      btn.classList.remove('btn-success', 'btn-danger');
+    });
+
+    selectedButton.classList.add(isCorrect ? 'btn-success' : 'btn-danger');
+    resultDiv.textContent = isCorrect ? 'Correct' : 'Incorrect';
+    resultDiv.style.display = 'block';
+    resultDiv.className = 'result alert ' + (isCorrect ? 'alert-success' : 'alert-danger');
+  }
+});
+
+
