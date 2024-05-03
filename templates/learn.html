@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  <!-- column for back button -->
+  <div class="col-md-2">
+
+    {% if current_lesson == 1%}
+      <a href="/"><button class="back-btn">Back</button></a>
+
+    {% elif current_lesson > 1%}
+      <a href="/learn/{{current_lesson-1}}/"><button class="back-btn">Back</button></a>
+
+    {% endif %}
+  </div>
+  <!-- column for lesson content -->
+    <div class="col-md-8" id="lesson_container">
+
+      <!-- row of main content -->
+      <div class="row" id="lesson_title">
+        <b>{{ lesson.title }}</b>
+      </div>
+
+      <!-- add more rows as needed -->
+      <div class="row" id="lesson_text">
+        <p>{{ lesson.text }}</p>
+      </div>
+
+      <!-- display media -->
+
+      {% if current_lesson < 4 %}
+        <div class="row" id="lesson_img">
+          <img src="{{ lesson.img }}" width="400">
+        </div>
+
+      {% elif current_lesson > 3 %}
+        <div class="row" id="lesson_video">
+          <iframe width="426" height="240" src="{{lesson.video}}" style="border:none;" ></iframe>
+        </div>
+        
+      {% endif %}
+        
+    </div>
+
+  <!-- column for next button -->
+  <div class="col-md-2">
+
+    {% if current_lesson < 7 %}
+      <a href="/learn/{{current_lesson+1}}/"><button class="next-btn">Next</button></a>
+
+    {% elif current_lesson == 7 %}
+      <a href="/quiz/1"><button class="next-btn">Quiz</button></a>
+
+    {% endif %}
+
+  </div>
+
+</div>
+
+{% endblock %}

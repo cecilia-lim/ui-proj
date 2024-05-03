@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container my-4">
+    <div class="question">
+        <p>True or false: a minor chord sounds bright or happy while a major chord sounds sad or contemplativ</p>
+    </div>
+    <div class="answers">
+        <button id="true" class="btn btn-secondary" data-correct="false">True</button>
+        <button id="false" class="btn btn-secondary" data-correct="true">False</button>
+    </div>
+    <div id="result" class="result" style="display:none;"></div>
+    <!-- Dynamically create Next button -->
+    {% if next_question %}
+    <br>
+    <div class="navigation">
+        <a href="{{ url_for('quiz', question_number=next_question) }}" class="btn btn-primary">Next</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

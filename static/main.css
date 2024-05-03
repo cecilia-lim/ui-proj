@@ -1,0 +1,115 @@
+.custom-screen{
+    background-color: white;
+    text-align: center;
+}
+
+#title-home{
+    font-family: Arial;
+    font-size: 50px;
+    color: #595959ff;
+    text-align: center;
+    padding: 10px;
+}
+
+#blurb-home{
+    font-family: Arial;
+    color: #595959ff;
+    font-size: 16px;
+    text-align: center;
+    padding: 10px;
+}
+
+.p-home{
+    font-family: Arial;
+    color: #595959ff;
+    text-align: center;
+    font-size: 12pt;
+    padding: 40px;
+}
+
+#start-home{
+    font-family: Arial;
+    text-align: center;
+}
+
+.start-btn{
+    background-color: #48bcabff;
+    border: 2px solid #48bcabff;
+    padding: 10px;
+    width: 75px;
+    color: white;
+    font-size: 15px;
+}
+
+.start-btn.start-btn-mousedown{
+    border: 2px solid #f88379ff;
+    background-color: #f88379ff;
+}
+
+.vertical-center{
+    margin: 0;
+    position: absolute;
+    top: 70%;
+    right: 48%;
+}
+
+.custom-screen{
+    padding: 20px;
+}
+
+#lesson_title{
+    font-size: 37px;
+    font-family: Arial;
+    color: #f88379ff;
+    font-weight:lighter;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+#lesson_text{
+    font-size: 12px;
+    font-family: Arial;
+    color: #595959ff;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#lesson_img{
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+
+.next-btn{
+    color: white;
+    border: 2px solid #48bcabff;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #48bcabff;
+    font-size: 15px;
+    margin-top: 10px;
+}
+
+.next-btn.next-btn-mousedown{
+    border: 2px solid #f88379ff;
+    background-color: #f88379ff;
+}
+
+.back-btn{
+    color: #595959ff;
+    border: solid 2px #eeeeeeff;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #eeeeeeff;
+    font-size: 15px;
+    margin-top: 10px;
+}
+
+.back-btn.back-btn-mousedown{
+    border: 2px solid #f88379ff;
+    background-color: #f88379ff;
+    color: white;
+}

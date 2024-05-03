@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jquery -->
+  <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>  
+  <script type="text/javascript" src="{{ url_for('static', filename='quiz.js') }}"></script>
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{url_for('static', filename='main.css')}}">
+  <title>Pop Chords</title>
+
+<style>
+  .navbar-custom{
+    height: 50px;
+    background-color: #eeeeeeff;
+    padding-top: 25px;
+  }
+  .navbar{
+    font-size: 13px;
+  }
+
+</style>
+
+</head>
+  <body>
+
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container">
+          <a class="navbar" href="/"><span style="color:#f88379ff;">Home</span></a>
+          <a class="navbar" href="/learn/1"><span style="color:#f88379ff;">Learn</span></a>
+          <a class="navbar" href="/quiz"><span style="color:#f88379ff;">Quiz</span></a>
+        </div>
+      </nav>
+      
+    <div class="container">   
+        {% block content %}
+        {% endblock %}
+    </div>
+
+  </body>
+</html>
