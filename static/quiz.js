@@ -1,3 +1,21 @@
+$(document).ready(function(){
+
+  $(".start-btn").mousedown(function () { 
+    $(this).addClass("start-btn-mousedown")
+  })
+
+  $(".next-btn").mousedown(function () { 
+    $(this).addClass("next-btn-mousedown")
+  })
+
+  $(".back-btn").mousedown(function () { 
+    $(this).addClass("back-btn-mousedown")
+  })
+
+
+})
+
+
 document.addEventListener('DOMContentLoaded', (event) => {
   const buttons = document.querySelectorAll('.answers button');
   const resultDiv = document.getElementById('result');
@@ -29,5 +47,3 @@ document.addEventListener('DOMContentLoaded', (event) => {
     resultDiv.className = 'result alert ' + (isCorrect ? 'alert-success' : 'alert-danger');
   }
 });
-
-
