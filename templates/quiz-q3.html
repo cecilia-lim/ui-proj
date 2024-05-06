@@ -2,19 +2,24 @@
 
 {% block content %}
 <div class="container my-4">
-    <div class="question">
-        <p>True or false: minor chords are represented by lowercase roman numerals in a progression, while major cords are upper case</p>
+    <div class="row" id="lesson_title">
+        <b>Question 3</b>
+      </div>
+    <div class="quiz-text-TF">
+        True or false:</div>   <div class="quiz-text">Traitor uses the I-iii-vi-IV chord progression, which is nicknamed the emotional progression.</div>
     </div>
     <div class="answers">
         <button id="true" class="btn btn-secondary" data-correct="true">True</button>
         <button id="false" class="btn btn-secondary" data-correct="false">False</button>
+        
     </div>
     <div id="result" class="result" style="display:none;"></div>
     <!-- Dynamically create Next button -->
     {% if next_question %}
     <br>
+    <br>
     <div class="navigation">
-        <a href="{{ url_for('quiz', question_number=next_question) }}" class="btn btn-primary">Next</a>
+        <a href="{{ url_for('quiz', question_number=next_question) }}" class="next-btn">Next</a>
     </div>
     {% endif %}
 </div>

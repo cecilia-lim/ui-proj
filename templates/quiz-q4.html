@@ -2,19 +2,36 @@
 
 {% block content %}
 <div class="container my-4">
-    <div class="question">
-        <p>True or false: minor chords are represented by lowercase roman numerals in a progression, while major cords are upper case</p>
+    <div class="row" id="lesson_title">
+        <b>Question 4</b>
+      </div>
+      <div class="quiz-text">Match the album to its chord progression</div>
+
+    <div class="row justify-content-center mb-5">
+        <!-- Draggable items -->
+        <div id="album1" class="col-md-4 draggable" draggable="true" data-chord="I-iii-vi-IV">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7CcGIjS-p3_0BvsP2BIrJ42Enk7ioQaLgMXNXXWtMKQ&s" alt="Olivia Rodrigo Album 1" class="img-fluid">
+        </div>
+        <div id="album2" class="col-md-4 draggable" draggable="true" data-chord="I-III-IV-iv">
+            <img src="https://i.discogs.com/Rd83pLBgs7speREI6__eXegcuCbhIm1qh3ZXuAmb5yI/rs:fit/g:sm/q:90/h:598/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI3NTUy/NjkwLTE2ODg0MzY5/NzItNzY1NC5qcGVn.jpeg" alt="Olivia Rodrigo Album 2" class="img-fluid">
+        </div>
     </div>
-    <div class="answers">
-        <button id="true" class="btn btn-secondary" data-correct="true">True</button>
-        <button id="false" class="btn btn-secondary" data-correct="false">False</button>
+
+    <div class="row justify-content-center">
+        <!-- Drop targets -->
+        <div id="chord1" class="col-md-4 dropzone" data-chord="I-iii-vi-IV">
+            I-iii-vi-IV
+        </div>
+        <div id="chord2" class="col-md-4 dropzone" data-chord="I-III-IV-iv">
+            I-III-IV-iv
+        </div>
     </div>
-    <div id="result" class="result" style="display:none;"></div>
-    <!-- Dynamically create Next button -->
+
+    <div id="result" class="result alert" style="display:none;"></div>
     {% if next_question %}
     <br>
     <div class="navigation">
-        <a href="{{ url_for('quiz', question_number=next_question) }}" class="btn btn-primary">Next</a>
+        <a href="{{ url_for('quiz', question_number=next_question) }}" class="next-btn">Next</a>
     </div>
     {% endif %}
 </div>

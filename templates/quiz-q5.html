@@ -2,20 +2,22 @@
 
 {% block content %}
 <div class="container my-4">
-    <div class="question">
-        <p>True or false: minor chords are represented by lowercase roman numerals in a progression, while major cords are upper case</p>
+    <div class="row" id="lesson_title">
+        <b>Question 5</b>
     </div>
+    <div class="quiz-text">
+        Which chord progression does the following song have?
+    </div>
+    <img src="https://upload.wikimedia.org/wikipedia/en/0/0f/Radiohead.pablohoney.albumart.jpg" alt="Radiohead album cover">
     <div class="answers">
-        <button id="true" class="btn btn-secondary" data-correct="true">True</button>
-        <button id="false" class="btn btn-secondary" data-correct="false">False</button>
+        <button id="true" class="btn btn-secondary" data-correct="false">I-iii-vi-IV (the same as Traitor)</button>
+        <button id="false" class="btn btn-secondary" data-correct="true">I-III-IV-iv (the same as Vampire)</button>
     </div>
     <div id="result" class="result" style="display:none;"></div>
-    <!-- Dynamically create Next button -->
-    {% if next_question %}
+    <!-- Next button for final question -->
     <br>
     <div class="navigation">
-        <a href="{{ url_for('quiz', question_number=next_question) }}" class="btn btn-primary">Next</a>
+        <a href="{{ url_for('quiz_results') }}" class="start-btn">Results</a>
     </div>
-    {% endif %}
 </div>
 {% endblock %}

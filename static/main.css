@@ -113,3 +113,66 @@
     background-color: #f88379ff;
     color: white;
 }
+
+.dropzone {
+    border: 2px dashed #ccc;
+    min-height: 200px; 
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    padding: 10px; 
+    margin-top: 20px;
+    background-color: #f0f0f0; 
+    font-size: 1.5rem; 
+    position: relative; 
+    overflow: hidden; 
+}
+
+.draggable {
+    width: 80%; 
+    height: auto;
+}
+
+.draggable img {
+    width: 100%; 
+    height: auto; 
+    transition: transform 0.3s; 
+}
+
+.draggable.dragging img {
+    transform: scale(0.7); 
+}
+
+.quiz-text {
+    font-size: 20px;
+    font-family: Arial;
+    color: #595959ff;
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+}
+
+.quiz-text-TF {
+    font-size: 22px;
+    font-family: Arial;
+    color: #595959ff;
+    font-weight: bold;
+
+}
+
+.btn-secondary {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    background-color: #6c757d;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+    transform: scale(1.1);
+    cursor: pointer;
+}
+

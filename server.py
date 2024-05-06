@@ -67,25 +67,25 @@ def home():
 @app.route('/quiz/<int:question_number>/', methods=['GET', 'POST'])
 def quiz(question_number):
     if request.method == 'POST':
+        
         answer = request.form.get('answer', '')
         quiz_answers[question_number] = answer
-        next_question = question_number + 1
-        if next_question > 5:
-            return redirect(url_for('results'))
-        else:
-            return redirect(url_for('quiz', question_number=next_question))
 
-    next_question = question_number + 1 if question_number < 5 else None
-    return render_template(f'quiz-q{question_number}.html', next_question=next_question)
+    next_question = question_number + 1
+    if next_question > 6:
+        return redirect(url_for('quiz_results'))
+    else:
+        return render_template(f'quiz-q{question_number}.html', next_question=next_question)
+
+@app.route('/quiz/results')
+def quiz_results():
+    
+    return render_template('results.html', quiz_answers=quiz_answers)
 
 @app.route('/quiz')  
 def quiz_start():
     return redirect(url_for('quiz', question_number=1))
 
-@app.route('/quiz/results')
-def results():
-
-    return f"Quiz answers: {quiz_answers}"
 
 if __name__ == '__main__':
     app.run(debug=True)
