@@ -10,6 +10,8 @@ $(document).ready(function() {
     $(".back-btn").mousedown(function() {
         $(this).addClass("back-btn-mousedown");
     });
+    
+    $("#results-score").append(calculateResults());
 });
 
 document.addEventListener('DOMContentLoaded', (event) => {

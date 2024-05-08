@@ -6,7 +6,7 @@
         <b>Question 2</b>
       </div>
     <div class="quiz-text-TF">
-        True or false:</div> <div class="quiz-text"> minor chords are represented by lowercase roman numerals in a progression, while major cords are upper case
+        True or false:</div> <div class="quiz-text"> Minor chords are represented by lowercase roman numerals in a progression, while major cords are upper case.
     </div>
     <div class="answers">
         <button id="true" class="btn btn-secondary" data-correct="true">True</button>
@@ -18,7 +18,7 @@
     <br>
     <br>
     <div class="navigation">
-        <a href="{{ url_for('quiz', question_number=next_question) }}" class="next-btn">Next</a>
+        <a href="{{ url_for('quiz', question_number=next_question) }}"><button class="next-btn">Next</button></a>
     </div>
     {% endif %}
 </div>

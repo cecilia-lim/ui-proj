@@ -6,7 +6,7 @@
         <b>Question 1</b>
       </div>
     <div class="quiz-text-TF">
-        True or false: </div> <div class= "quiz-text">minor chord sounds bright or happy while a major chord sounds sad or contemplativ</p>
+        True or False: </div> <div class= "quiz-text">Minor chord sounds bright or happy while a major chord sounds sad or contemplative.</p>
     </div>
     <div class="answers">
         <button id="true" class="btn btn-secondary" data-correct="false">True</button>
@@ -19,7 +19,7 @@
     <br>
     <br>
     <div class="navigation">
-        <a href="{{ url_for('quiz', question_number=next_question) }}" class="next-btn">Next</a>
+        <a href="{{ url_for('quiz', question_number=next_question) }}"><button class="next-btn">Next</button></a>
     </div>
     {% endif %}
 </div>

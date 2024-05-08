@@ -176,3 +176,14 @@
     cursor: pointer;
 }
 
+iframe{
+    padding-top: 10px;
+    padding-bottom: 40px;
+}
+
+.back-btn{
+    background-color: #48bcabff;
+    margin-top: 20px;
+    color: white;
+    border: 2px solid #48bcabff;
+}

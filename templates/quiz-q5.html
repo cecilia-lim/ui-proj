@@ -8,7 +8,7 @@
     <div class="quiz-text">
         Which chord progression does the following song have?
     </div>
-    <img src="https://upload.wikimedia.org/wikipedia/en/0/0f/Radiohead.pablohoney.albumart.jpg" alt="Radiohead album cover">
+    <iframe src="https://www.youtube.com/embed/4BX5xpB2DBM" controls="true" frameborder="0" width="640px" height="360px"></iframe>
     <div class="answers">
         <button id="true" class="btn btn-secondary" data-correct="false">I-iii-vi-IV (the same as Traitor)</button>
         <button id="false" class="btn btn-secondary" data-correct="true">I-III-IV-iv (the same as Vampire)</button>
@@ -17,7 +17,7 @@
     <!-- Next button for final question -->
     <br>
     <div class="navigation">
-        <a href="{{ url_for('quiz_results') }}" class="start-btn">Results</a>
+        <a href="{{ url_for('quiz_results') }}"><button class="next-btn">Results</button></a>
     </div>
 </div>
 {% endblock %}

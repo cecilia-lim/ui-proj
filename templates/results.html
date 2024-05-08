@@ -3,8 +3,9 @@
 {% block content %}
 <div class="container my-4 text-center">
     <h1>Great Work!</h1>
-    <div class = "quiz-text">You got a score of {{ quiz_answers}} / 5!</div>
+    <div class = "quiz-text">You got a score of {{ quiz_answers }} / 5!</div>
     <!-- You may want to calculate the number of correct answers here -->
-    <a href="{{ url_for('quiz_start') }}" class="start-btn">Back to Start of Quiz</a>
+    <a href="/"><button class="back-btn">Back to Home</button></a>
+
 </div>
 {% endblock %}

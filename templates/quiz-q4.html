@@ -5,7 +5,7 @@
     <div class="row" id="lesson_title">
         <b>Question 4</b>
       </div>
-      <div class="quiz-text">Match the album to its chord progression</div>
+      <div class="quiz-text">Match the album to its chord progression:</div>
 
     <div class="row justify-content-center mb-5">
         <!-- Draggable items -->
@@ -31,7 +31,7 @@
     {% if next_question %}
     <br>
     <div class="navigation">
-        <a href="{{ url_for('quiz', question_number=next_question) }}" class="next-btn">Next</a>
+        <a href="{{ url_for('quiz', question_number=next_question) }}"><button class="next-btn">Next</button></a>
     </div>
     {% endif %}
 </div>
