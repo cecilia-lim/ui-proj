@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container my-4 text-center">
+    <h1>Great Work!</h1>
+    <div class = "quiz-text">You got a score of {{ quiz_answers }} / 5!</div>
+    <!-- You may want to calculate the number of correct answers here -->
+    <a href="/"><button class="back-btn">Back to Home</button></a>
+
+</div>
+{% endblock %}
