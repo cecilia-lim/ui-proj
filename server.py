@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 global current_lesson
 current_lesson = 1
-quiz_answers = {}
+quiz_answers = 0
 
 question_number = 1
 
@@ -58,64 +58,75 @@ def learn(current_lesson):
 def home():
     return render_template('home.html')
 
-# @app.route('/quiz/<int:question_number>/', methods=['GET', 'POST'])
-# def quiz(question_number):
-#     if request.method == 'POST':
-        
-#         answer = request.form.get('answer', '')
-#         quiz_answers[question_number] = answer
-
-#     next_question = question_number + 1
-#     if next_question > 6:
-#         return redirect(url_for('quiz_results'))
-#     else:
-#         return render_template(f'quiz-q{question_number}.html', next_question=next_question)
-
-@app.route('/quiz/results')
-def quiz_results():
-    
-    return render_template('results.html', quiz_answers=quiz_answers)
-
 current_question = 1
 
+# Define your questions and answers
 questions = [
     {
         "id": 1,
-        "text": """True or False: a minor chord sounds bright or happy while a major chord sounds sad or contemplative.""",
-        "options": {1:"True", 2:"False"},
-        "answer":2,
+        "text": "True or False: a minor chord sounds bright or happy while a major chord sounds sad or contemplative.",
+        "options": {1: "True", 2: "False"},
+        "answer": 2,
     },
     {
         "id": 2,
-        "text": """True or False: minor chords are represented by lowercase roman numerals, while major chords are upper case.""",
-        "options": {1:"True", 2:"False"},
-        "answer":1,
+        "text": "True or False: minor chords are represented by lowercase roman numerals, while major chords are upper case.",
+        "options": {1: "True", 2: "False"},
+        "answer": 1,
     },
     {
         "id": 3,
-        "text": """True or False: Traitor uses the I-iii-vi-IV chord progression, which is nicknamed the emotional progression.""",
-        "options": {1:"True", 2:"False"},
-        "answer":1,
+        "text": "True or False: Traitor uses the I-iii-vi-IV chord progression, which is nicknamed the emotional progression.",
+        "options": {1: "True", 2: "False"},
+        "answer": 1,
     },
     {
         "id": 4,
-        "text": """True or False: As listeners, we have different expectations for major and minor chords within a key.""",
-        "options": {1:"True", 2:"False"},
-        "answer":1,
+        "text": "True or False: As listeners, we have different expectations for major and minor chords within a key.",
+        "options": {1: "True", 2: "False"},
+        "answer": 1,
     },
     {
         "id": 5,
-        "text": """Which chord progression do the songs use?""",
-        "options": {1:"https://i.discogs.com/Rd83pLBgs7speREI6__eXegcuCbhIm1qh3ZXuAmb5yI/rs:fit/g:sm/q:90/h:598/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI3NTUy/NjkwLTE2ODg0MzY5/NzItNzY1NC5qcGVn.jpeg", 
-                    2:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7CcGIjS-p3_0BvsP2BIrJ42Enk7ioQaLgMXNXXWtMKQ&s"},
-        "answer": ""
+        "text": "Which chord progression do the songs use?",
+        "options": {1: "Option URL 1", 2: "Option URL 2"},
+        "answer": 1,
     },
 ]
 
 @app.route('/quiz/<int:current_question>/', methods=['GET', 'POST'])
 def quiz(current_question):
+    if request.method == 'POST':
+        # Assume the answer comes in a JSON payload
+        data = request.json
+        print("Received data:", data)  # This will show you what the server sees
+
+        selected_answer = data['answer']
+        correct_answer = questions[current_question - 1]['answer']
+        is_correct = int(selected_answer) == correct_answer
+        
+        # Respond with whether the answer was correct
+        response_data = {'is_correct': is_correct, 'current_question': current_question}
+        if current_question == len(questions):
+            response_data['final'] = True
+            # Optionally, calculate and include more data like total correct answers
+        return jsonify(response_data)
+    
+    # Display the question page
     question = questions[current_question - 1]
     return render_template('quiz.html', question=question, current_question=current_question)
+
+results_storage = {}
+
+@app.route('/quiz/results', methods=['GET', 'POST'])
+def handle_results():
+    if request.method == 'POST':
+        data = request.get_json()
+        results_storage['last_results'] = data  # Store results
+        return jsonify({'success': True})
+    else:
+        results = results_storage.get('last_results', {'correctAnswers': 0, 'timeTaken': 0})
+        return render_template('results.html', quiz_answers=results['correctAnswers'], total_time=results['timeTaken'])
 
 if __name__ == '__main__':
     app.run(debug=True)
