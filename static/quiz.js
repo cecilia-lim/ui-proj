@@ -4,7 +4,11 @@ $(document).ready(function() {
         $(this).addClass($(this).attr('id') + '-mousedown');
     });
 
-    const startTime = Date.now();
+    if (currentQuestion === 1){ 
+        // Save the start time if they are on the 1st question or re-started the quiz
+        localStorage.setItem('quiz_start', Date.now());
+    }
+
     let correctAnswers = 0;
     const totalQuestions = 5;
     const resultDiv = document.getElementById('result-display');
@@ -69,7 +73,7 @@ $(document).ready(function() {
     // Calculate final results and send them to the server
     function calculateResults() {
         const endTime = Date.now();
-        const timeTaken = Math.floor(endTime - startTime)
+        const timeTaken = Math.floor(endTime - parseInt(localStorage.getItem('quiz_start')))
         const results = {
             correctAnswers: correctAnswers,
             timeTaken: timeTaken

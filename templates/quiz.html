@@ -34,12 +34,13 @@
     {% if current_question < 5 %}
       <a href="/quiz/{{current_question+1}}/"><button class="quiz-next">Next</button></a>
     {% else %}
-      <a href="/results"><button id="quiz-btn">Results</button></a>
+      <a href="/quiz/results"><button id="quiz-btn">Results</button></a>
     {% endif %}
   </div>
 
 </div>
 <script>
+  window.currentQuestion = {{ current_question }};
   document.querySelector('.navbar-quiz').className += ` navbar-current`;
 </script>
 {% endblock %}

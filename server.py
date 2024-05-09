@@ -126,7 +126,16 @@ def handle_results():
         return jsonify({'success': True})
     else:
         results = results_storage.get('last_results', {'correctAnswers': 0, 'timeTaken': 0})
-        return render_template('results.html', quiz_answers=results['correctAnswers'], total_time=results['timeTaken'])
+
+        # Convert from MS to seconds 
+        total_time = results['timeTaken'] / 1000
+
+        # Get minutes 
+        total_minutes = total_time // 60
+        total_seconds = total_time % 60
+
+        time_taken = f"{round(total_minutes)} minutes, and {round(total_seconds)} seconds"
+        return render_template('results.html', quiz_answers=results['correctAnswers'], total_time=time_taken)
 
 if __name__ == '__main__':
     app.run(debug=True)
