@@ -1,56 +1,46 @@
 {% extends "layout.html" %}
 
 {% block content %}
-  <!-- column for back button -->
-  <div class="col-md-2">
-
-  </div>
-  <!-- column for lesson content -->
-    <div class="col-md-8" id="lesson_container">
-
-      <!-- row of main content -->
-      <div class="row" id="question_number">
-        <b>Question {{ question.id }}</b>
-      </div>
-
-      <!-- add more rows as needed -->
-      <div class="row" id="question_text">
-        <p>{{ question.text }}</p>
-      </div>
-
-      <!-- display options -->
-
-      {% if current_question < 5 %}
-        <div class="row" id="multiple-choice">
-            {% for i in question.options %}
-                    <button class="btn btn-secondary">{{question.options[i]}}</button>
-            {% endfor %}
-        </div>
-
-        <!-- add drop and drop question here-->
-      {% elif current_question == 5 %}
-        <div class="row">
-
-        </div>
-      {% endif %}
-
-        <div>
-        <!--next button -->
-        {% if current_question < 5 %}
-            <a href="/quiz/{{current_question+1}}/"><button class="quiz-next">Next</button></a>
-
-        {% elif current_lesson == 5 %}
-            <a href="/results"><button id="quiz-btn">Results</button></a>
-  
-        {% endif %}
-        </div>
-    </div>
-
-
+<!-- Column for back button -->
+<div class="col-md-2">
 </div>
 
+<!-- Column for lesson content -->
+<div class="col-md-8" id="lesson_container" data-question-id="{{ current_question }}">
+
+  <!-- Row of main content -->
+  <div class="row" id="question_number">
+    <b>Question {{ question.id }}</b>
+  </div>
+
+  <div class="row" id="question_text">
+    <p>{{ question.text }}</p>
+  </div>
+
+  <!-- Display options -->
+  <div class="row" id="multiple-choice">
+    {% for option_value, option_label in question.options.items() %}
+    <button class="btn btn-secondary answer-button" data-option="{{ option_value }}">
+        {{ option_label }}
+    </button>
+    {% endfor %}
+  </div>
+
+  <!-- Result display element -->
+  <div id="result-display" class="alert" style="display: none;"></div>
+
+  <!-- Navigation buttons -->
+  <div>
+    {% if current_question < 5 %}
+      <a href="/quiz/{{current_question+1}}/"><button class="quiz-next">Next</button></a>
+    {% else %}
+      <a href="/quiz/results"><button id="quiz-btn">Results</button></a>
+    {% endif %}
+  </div>
+
+</div>
 <script>
+  window.currentQuestion = {{ current_question }};
   document.querySelector('.navbar-quiz').className += ` navbar-current`;
 </script>
-
 {% endblock %}

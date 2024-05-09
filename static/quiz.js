@@ -1,74 +1,128 @@
 $(document).ready(function() {
-    $("#start-btn").mousedown(function() {
-        $(this).addClass("start-btn-mousedown");
+    // Add 'mousedown' classes for visual feedback on button presses
+    $("#start-btn, .next-btn, .back-btn, #quiz-btn, .quiz-next").mousedown(function() {
+        $(this).addClass($(this).attr('id') + '-mousedown');
     });
 
-    $(".next-btn").mousedown(function() {
-        $(this).addClass("next-btn-mousedown");
+    if (currentQuestion === 1){ 
+        // Save the start time if they are on the 1st question or re-started the quiz
+        localStorage.setItem('quiz_start', Date.now());
+    }
+
+    let correctAnswers = 0;
+    const totalQuestions = 5;
+    const resultDiv = document.getElementById('result-display');
+
+    // Submit answer using AJAX and handle response
+    function submitAnswer(currentQuestion, selectedOption) {
+        $.ajax({
+            url: '/quiz/' + currentQuestion + '/',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({answer: selectedOption}),
+            success: function(response) {
+             
+                setResultBanner(response.is_correct);
+                disableButtons(currentQuestion);
+
+                // Increment correct answers count if the answer was correct
+                if (response.is_correct) {
+                    correctAnswers++;
+                }
+
+                // Check if the current question is the last one
+                if (currentQuestion === totalQuestions) {
+                    calculateResults();
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error("Error submitting answer:", error);
+            }
+        });
+    }
+
+    // Handle button clicks for quiz answers
+    document.addEventListener('click', function(event) {
+        if (!event.target.matches('.answer-button')) return;
+        const button = event.target;
+        if (button.classList.contains('answered')) return;
+
+        const questionId = button.closest('[data-question-id]').getAttribute('data-question-id');
+        const selectedOption = button.getAttribute('data-option');
+
+        // Submit the answer using AJAX
+        submitAnswer(parseInt(questionId), selectedOption);
+
+        // Mark the button as answered
+        button.classList.add('answered');
     });
 
-    $(".back-btn").mousedown(function() {
-        $(this).addClass("back-btn-mousedown");
-    });
+    function disableButtons(questionId) {
+        document.querySelectorAll(`[data-question-id='${questionId}'] .answer-button`).forEach(button => {
+            button.disabled = true;
+        });
+    }
 
-    $("#quiz-btn").mousedown(function() {
-        $(this).addClass("quiz-btn-mousedown");
-    });
+    // Set result display for button-based questions
+    function setResultBanner(isCorrect) {
+        resultDiv.textContent = isCorrect ? 'Correct' : 'Incorrect';
+        resultDiv.className = 'alert ' + (isCorrect ? 'alert-success' : 'alert-danger');
+        resultDiv.style.display = 'block';
+    }
 
-    $(".quiz-next").mousedown(function() {
-        $(this).addClass("quiz-next-mousedown");
-    });
+    // Calculate final results and send them to the server
+    function calculateResults() {
+        const endTime = Date.now();
+        const timeTaken = Math.floor(endTime - parseInt(localStorage.getItem('quiz_start')))
+        const results = {
+            correctAnswers: correctAnswers,
+            timeTaken: timeTaken
+        };
 
-    // // track time
-    // $("#start-btn").click(function() {
-    //     const tutorialStart = Date.now();
-    // });
-
-    // $("#quiz-btn").click(function() {
-    //     const tutorialEnd = Date.now();
-
-    //     let timeSpent = tutorialEnd - tutorialEnd;
-
-    //     $("#results-score").html("You finished the tutorial in "+timeSpent+"minutes!");
-    // });
-
+        // Log the results to the console for debugging
+        console.log("Sending results:", results);
+    
+        // Send results to the server
+        $.ajax({
+            url: '/quiz/results',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(results),
+            success: function() {
+                window.location.href = '/quiz/results';  // Redirect to the results page
+            },
+            error: function(xhr, status, error) {
+                console.error("Error submitting results:", error);
+            }
+        });
+    }
 });
 
-document.addEventListener('DOMContentLoaded', (event) => {
-    const buttons = document.querySelectorAll('.answers button');
-    const resultDiv = document.getElementById('result');
-    const startTime = Date.now();
-    let correctAnswers = 0;
 
-    buttons.forEach(button => {
-        button.addEventListener('click', function() {
-            if (this.classList.contains('answered')) return;
-            const isCorrect = this.getAttribute('data-correct') === 'true';
-            if (isCorrect) correctAnswers++;
-            setResult(this, isCorrect);
-            this.classList.add('answered');
-            disableButtons(this.parentNode); // Disable all buttons in this question group
-        });
-    });
 
+
+
+    // // Existing functions for drag and drop or final results (if needed) remain unchanged
+
+    // Drag and drop functionality
     const draggables = document.querySelectorAll('.draggable');
     const dropzones = document.querySelectorAll('.dropzone');
 
     draggables.forEach(draggable => {
-        draggable.addEventListener('dragstart', () => {
-            if (draggable.classList.contains('answered')) return;
-            draggable.classList.add('dragging');
+        draggable.addEventListener('dragstart', function() {
+            if (this.classList.contains('answered')) return;
+            this.classList.add('dragging');
         });
 
-        draggable.addEventListener('dragend', () => {
-            draggable.classList.remove('dragging');
-            draggable.classList.add('answered');
+        draggable.addEventListener('dragend', function() {
+            this.classList.remove('dragging');
+            this.classList.add('answered');
             checkCompletion();
         });
     });
 
     dropzones.forEach(dropzone => {
-        dropzone.addEventListener('dragover', e => {
+        dropzone.addEventListener('dragover', function(e) {
             e.preventDefault();
             const draggable = document.querySelector('.dragging');
             if (!draggable.classList.contains('answered')) {
@@ -77,12 +131,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         });
     });
 
-    function disableButtons(buttonGroup) {
-        buttonGroup.querySelectorAll('button').forEach(button => {
-            button.disabled = true;
-        });
-    }
-
+    // Check if all answers have been placed for drag-and-drop
     function checkCompletion() {
         const allPlaced = [...dropzones].every(dropzone => dropzone.querySelector('.draggable.answered'));
         if (allPlaced) {
@@ -91,25 +140,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
         }
     }
 
-    function setResult(element, isCorrect) {
-        element.classList.add(isCorrect ? 'btn-success' : 'btn-danger');
-        resultDiv.textContent = isCorrect ? 'Correct' : 'Incorrect';
-        resultDiv.style.display = 'block';
-        resultDiv.className = 'result alert ' + (isCorrect ? 'alert-success' : 'alert-danger');
-    }
-
+    // Evaluate correctness for drag-and-drop
     function evaluateCorrectness() {
         dropzones.forEach(dropzone => {
-            const isCorrect = dropzone.querySelector('.draggable').getAttribute('data-chord') === dropzone.getAttribute('data-chord');
+            const draggable = dropzone.querySelector('.draggable');
+            const isCorrect = draggable.getAttribute('data-chord') === dropzone.getAttribute('data-chord');
             dropzone.style.backgroundColor = isCorrect ? '#90ee90' : '#ffcccb';
             if (isCorrect) correctAnswers++;
         });
     }
 
-    function calculateResults() {
-        const endTime = Date.now();
-        const timeTaken = Math.floor((endTime - startTime) / 60000); // Time in minutes
-        resultDiv.textContent += ` You got a score of ${correctAnswers} / 5! It took you ${timeTaken} minutes.`;
-    }
-});
 

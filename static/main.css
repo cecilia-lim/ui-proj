@@ -262,3 +262,7 @@ iframe{
     background-size: cover;
     border-radius: 20px;
 }
+
+#result-display {
+    margin-top: 10px;
+}
