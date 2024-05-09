@@ -29,12 +29,12 @@
 
       {% if current_lesson < 3 %}
         <div class="row" id="lesson_img">
-          <img src="{{ lesson.img }}" width="400">
+          <img src="{{ lesson.img }}" alt="{{ lesson.alt }}" width="400">
         </div>
 
       {% elif current_lesson > 2 %}
         <div class="row" id="lesson_video">
-          <iframe src="{{lesson.video}}" controls="true" frameborder="0" width="640px" height="360px"></iframe>
+          <iframe src="{{lesson.video}}" alt="{{ lesson.alt }}" controls="true" frameborder="0" width="640px" height="360px"></iframe>
         </div>
         
       {% endif %}

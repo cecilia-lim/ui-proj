@@ -1,10 +1,10 @@
 {% extends "layout.html" %}
 
 {% block content %}
-  <!-- column for back button -->
+  <!-- left column for spacing -->
   <div class="col-md-2">
-
   </div>
+
   <!-- column for lesson content -->
     <div class="col-md-8" id="lesson_container">
 
@@ -19,19 +19,36 @@
       </div>
 
       <!-- display options -->
-
+      <!-- for multiple choice questions -->
       {% if current_question < 5 %}
         <div class="row" id="multiple-choice">
             {% for i in question.options %}
-                    <button class="btn btn-secondary">{{question.options[i]}}</button>
+              <button class="btn btn-secondary">{{question.options[i]}}</button>
             {% endfor %}
         </div>
 
-        <!-- add drop and drop question here-->
+      <!-- for drag and drop question -->
       {% elif current_question == 5 %}
-        <div class="row">
-
+        <div class="row justify-content-center mb-5">
+            <!-- Draggable items -->
+            <div id="album1" class="col-md-4 draggable" draggable="true" data-chord="I-iii-vi-IV">
+                <img src="{{ question.options[1] }}" alt="Olivia Rodrigo Album 1" class="img-fluid">
+            </div>
+            <div id="album2" class="col-md-4 draggable" draggable="true" data-chord="I-III-IV-iv">
+                <img src="{{ question.options[2] }}" alt="Olivia Rodrigo Album 2" class="img-fluid">
+            </div>
         </div>
+    
+        <div class="row justify-content-center">
+            <!-- Drop targets -->
+            <div id="chord1" class="col-md-4 dropzone" data-chord="I-iii-vi-IV">
+                I-iii-vi-IV
+            </div>
+            <div id="chord2" class="col-md-4 dropzone" data-chord="I-III-IV-iv">
+                I-III-IV-iv
+            </div>
+        </div>
+
       {% endif %}
 
         <div>
@@ -39,8 +56,8 @@
         {% if current_question < 5 %}
             <a href="/quiz/{{current_question+1}}/"><button class="quiz-next">Next</button></a>
 
-        {% elif current_lesson == 5 %}
-            <a href="/results"><button id="quiz-btn">Results</button></a>
+        {% elif current_question == 5 %}
+            <a href="/results"><button class="quiz-next" id="results-btn">Results</button></a>
   
         {% endif %}
         </div>
