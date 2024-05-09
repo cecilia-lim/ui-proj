@@ -18,20 +18,7 @@ $(document).ready(function() {
     $(".quiz-next").mousedown(function() {
         $(this).addClass("quiz-next-mousedown");
     });
-
-    // // track time
-    // $("#start-btn").click(function() {
-    //     const tutorialStart = Date.now();
-    // });
-
-    // $("#quiz-btn").click(function() {
-    //     const tutorialEnd = Date.now();
-
-    //     let timeSpent = tutorialEnd - tutorialEnd;
-
-    //     $("#results-score").html("You finished the tutorial in "+timeSpent+"minutes!");
-    // });
-
+  
 });
 
 document.addEventListener('DOMContentLoaded', (event) => {

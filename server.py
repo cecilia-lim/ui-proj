@@ -77,9 +77,8 @@ def home():
 #     else:
 #         return render_template(f'quiz-q{question_number}.html', next_question=next_question)
 
-@app.route('/quiz/results')
+@app.route('/results')
 def quiz_results():
-    
     return render_template('results.html', quiz_answers=quiz_answers)
 
 current_question = 1
