@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  <!-- column for back button -->
+  <div class="col-md-2">
+
+  </div>
+  <!-- column for lesson content -->
+    <div class="col-md-8" id="lesson_container">
+
+      <!-- row of main content -->
+      <div class="row" id="question_number">
+        <b>Question {{ question.id }}</b>
+      </div>
+
+      <!-- add more rows as needed -->
+      <div class="row" id="question_text">
+        <p>{{ question.text }}</p>
+      </div>
+
+      <!-- display options -->
+
+      {% if current_question < 5 %}
+        <div class="row" id="multiple-choice">
+            {% for i in question.options %}
+                    <button class="btn btn-secondary">{{question.options[i]}}</button>
+            {% endfor %}
+        </div>
+
+        <!-- add drop and drop question here-->
+      {% elif current_question == 5 %}
+        <div class="row">
+
+        </div>
+      {% endif %}
+
+        <div>
+        <!--next button -->
+        {% if current_question < 5 %}
+            <a href="/quiz/{{current_question+1}}/"><button class="quiz-next">Next</button></a>
+
+        {% elif current_lesson == 5 %}
+            <a href="/results"><button id="quiz-btn">Results</button></a>
+  
+        {% endif %}
+        </div>
+    </div>
+
+
+</div>
+
+<script>
+  document.querySelector('.navbar-quiz').className += ` navbar-current`;
+</script>
+
+{% endblock %}

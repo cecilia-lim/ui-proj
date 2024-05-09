@@ -2,6 +2,7 @@
 
 {% block content %}
 <div class="container custom-screen">
+    <div class="backdrop"></div>
     <div>
         <p id="title-home">Pop Chord Progressions</p>
         <i><p id="blurb-home">Do you like Olivia Rodrigo? Ever wonder about the theory behind her hits?</p></i>
@@ -11,8 +12,11 @@
     </div>
 
     <div class="row vertical-center">
-        <a href="/learn/1"><button class="start-btn">start</button></a>
+        <a href="/learn/1"><button id="start-btn">start</button></a>
     </div>
 
 </div>
+<script>
+    document.querySelector('.navbar-home').className += ` navbar-current`;
+</script>
 {% endblock %}
