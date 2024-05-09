@@ -25,8 +25,9 @@
     font-family: Arial;
     color: #595959ff;
     text-align: center;
-    font-size: 20pt;
-    padding: 40px;
+    font-size: 16pt;
+    padding-top: 40px;
+    padding-bottom: 0px;
 }
 
 #start-home{
@@ -41,6 +42,7 @@
     width: 75px;
     color: white;
     font-size: 20px;
+    margin-top: -60px;
 }
 
 #start-btn.start-btn-mousedown{
