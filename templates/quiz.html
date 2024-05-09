@@ -22,9 +22,21 @@
       <!-- for multiple choice questions -->
       {% if current_question < 5 %}
         <div class="row" id="multiple-choice">
-            {% for i in question.options %}
-              <button class="btn btn-secondary">{{question.options[i]}}</button>
-            {% endfor %}
+          {% if question.answer == 1 %}
+            <div class="answers">
+                <button id="true" class="btn btn-secondary" data-correct="true">True</button>
+                <button id="false" class="btn btn-secondary" data-correct="false">False</button>
+            </div>
+
+          {% elif question.answer == 2 %}
+          <div class="answers">
+            <button id="true" class="btn btn-secondary" data-correct="false">True</button>
+            <button id="false" class="btn btn-secondary" data-correct="true">False</button>
+          </div>          
+          {% endif %}
+
+          <div id="result" class="result" style="display:none;"></div>            
+        
         </div>
 
       <!-- for drag and drop question -->
