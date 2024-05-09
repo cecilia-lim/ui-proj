@@ -9,6 +9,8 @@
     color: #595959ff;
     text-align: center;
     padding: 10px;
+    padding-bottom: 0px;
+    margin-top: 20px;
 }
 
 #blurb-home{
@@ -16,7 +18,7 @@
     color: #595959ff;
     font-size: 20px;
     text-align: center;
-    padding: 10px;
+    padding: 0px;
 }
 
 .p-home{
